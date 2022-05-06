@@ -1,5 +1,6 @@
 import com.sun.jmx.snmp.SnmpUnknownMsgProcModelException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.stream.Collectors;
@@ -105,13 +106,13 @@ public class Board {
 
         Board cast = (Board) y;
 
-        if(cast.len != this.len) {
+        if (cast.len != this.len) {
             return false;
         }
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                if(cast.tiles[i][j] != this.tiles[i][j]) {
+                if (cast.tiles[i][j] != this.tiles[i][j]) {
                     return false;
                 }
             }
@@ -122,31 +123,71 @@ public class Board {
 
     // all neighboring boards we are not returning an iterator we are returning ITERABLE
     public Iterable<Board> neighbors() {
-        return new Iterable<Board>() {
-            @Override
-            public Iterator<Board> iterator() {
-                return new adjacentIterator();
-            }
-        };
+        ArrayList<Board> list = new ArrayList<>();
+        ArrayList<Board> listNeighbors = new ArrayList<>();
+
+        listNeighbors = neighbourBoards(list, this.tiles);
+
+        return listNeighbors;
     }
 
-    private class adjacentIterator implements Iterator<Board> {
-        @Override
-        public boolean hasNext() {
-            return false;
+    private ArrayList neighbourBoards(ArrayList storeBoards, int[][] boardOriginal) {
+        boolean condition = false;
+        int countLeft = 0, countRight = 0, countUp = 0, countDown = 0;
+        int row = 0;
+        int col = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (boardOriginal[i][j] == 0) {
+                    row = i;
+                    col = j;
+                }
+            }
         }
 
-        @Override
-        public Board next() {
-            return null;
+        while (!condition) {
+            int[][] boardStore = new int[len][len];
+            for(int i = 0; i < len; i++) {
+                boardStore[i] = Arrays.copyOf(boardOriginal[i], boardOriginal[i].length);
+            }
+
+            if (col != 0 && countLeft == 0) {
+                boardStore[row][col] = boardStore[row][col - 1];
+                boardStore[row][col - 1] = 0;
+                countLeft++;
+                Board boardLeft = new Board(boardStore);
+                storeBoards.add(boardLeft);
+            } else if (col != (len - 1) && countRight == 0) {
+                boardStore[row][col] = boardStore[row][col + 1];
+                boardStore[row][col + 1] = 0;
+                countRight++;
+                Board boardRight = new Board(boardStore);
+                storeBoards.add(boardRight);
+            } else if (row != 0 && countUp == 0) {
+                boardStore[row][col] = boardStore[row - 1][col];
+                boardStore[row - 1][col] = 0;
+                countUp++;
+                Board boardUp = new Board(boardStore);
+                storeBoards.add(boardUp);
+            } else if (row != (len - 1) && countDown == 0) {
+                boardStore[row][col] = boardStore[row + 1][col];
+                boardStore[row + 1][col] = 0;
+                countDown++;
+                Board boardDown= new Board(boardStore);
+                storeBoards.add(boardDown);
+            } else {
+                condition = true;
+            }
         }
+
+        return storeBoards;
     }
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-        int[][] tiles = new int[1][1];
-        Board board = new Board(tiles);
-        return board;
+        Board twin = new Board(this.tiles);
+        return twin;
     }
 
     // unit testing (not graded)
@@ -220,7 +261,7 @@ public class Board {
         tiles4[1][2] = 6;
         tiles4[2][0] = 7;
         tiles4[2][1] = 8;
-        tiles4[2][2] = 9;
+        tiles4[2][2] = 0;
 
         Board board4 = new Board(tiles4);
 
@@ -231,6 +272,9 @@ public class Board {
         System.out.println();
 
         System.out.println(board4.equals(board));
+
+        board.neighbors();
+        board2.neighbors();
 
 
     }
