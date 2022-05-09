@@ -136,7 +136,7 @@ public class Board {
         int countLeft = 0, countRight = 0, countUp = 0, countDown = 0;
         int row = 0;
         int col = 0;
-
+        //Avoid deep copying and mutability
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 if (boardOriginal[i][j] == 0) {
@@ -275,6 +275,10 @@ public class Board {
 
         board.neighbors();
         board2.neighbors();
+
+        for(Board neighbors: board2.neighbors()) {
+            System.out.println(neighbors);
+        }
 
 
     }
