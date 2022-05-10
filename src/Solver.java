@@ -14,7 +14,6 @@ public class Solver {
     private List<Board> shortestSolution;
     private int totalMoves = 0;
 
-    // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
         MinPQ<SearchNode> pqTwin = new MinPQ<SearchNode>();
