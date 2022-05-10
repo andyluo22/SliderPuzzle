@@ -4,62 +4,48 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Solver {
     private int minMoves = 0;
-    private List<Board> shortestSolution;
-    private Board goalBoard;
     private boolean reachedGoal = false;
     private boolean reachedGoalTwin = false;
-    private SearchNode min;
-    private SearchNode minTwin;
-    private SearchNode leafLast;
-    private List<Board> ssReversed;
+    private SearchNode leafNode;
+    private List<Board> shortestSolution;
+    private int totalMoves = 0;
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
         MinPQ<SearchNode> pqTwin = new MinPQ<SearchNode>();
         shortestSolution = new ArrayList<Board>();
-        List shortestSolutionTwin = new ArrayList<Board>();
-        ssReversed = new ArrayList<Board>();
         Board prev = null;
-
-
-        //create goalBoard
-        int[][] goalArray = new int[initial.dimension()][initial.dimension()];
-        goalArray = createGoalBoard(goalArray);
-        goalBoard = new Board(goalArray);
 
         if (initial == null) {
             throw new IllegalArgumentException("Please input an nxn board that is not null");
         }
-        if (initial.equals(goalBoard)) {
+        if (initial.isGoal()) {
             reachedGoal = true;
-            ssReversed.add(initial);
+            shortestSolution.add(initial);
         }
-        //create initial searchNode tree and add it into priority queue
-        //Note:  The priority queue keeps track of smallest priority so we remove these and add the neighbours of the node into the pq
+
         SearchNode initNode = new SearchNode(null, initial, 0);
         pq.insert(initNode);
         SearchNode initNodeTwin = new SearchNode(null, initial.twin(), 0);
         pqTwin.insert(initNodeTwin);
 
+        SearchNode min;
+        SearchNode minTwin;
         while (!reachedGoal && !reachedGoalTwin) {
             min = pq.delMin();
             minTwin = pqTwin.delMin();
             minMoves++;
-            shortestSolution.add(min.getBoard());
-            shortestSolutionTwin.add(minTwin.getBoard());
 
             for (Board neighbor : min.getBoard().neighbors()) {
                 if (minMoves!= 1) {
                     prev = min.getParent().getBoard();
                 }
                 if(neighbor.isGoal()) {
-                    shortestSolution.add(neighbor);
-                    leafLast = new SearchNode(min,neighbor,min.getNumMoves() + 1);
+                    leafNode = new SearchNode(min,neighbor,min.getNumMoves() + 1);
                     reachedGoal = true;
                     break;
                 }
@@ -78,7 +64,6 @@ public class Solver {
                 }
 
                 if(neighbor.isGoal()) {
-                    shortestSolutionTwin.add(neighbor);
                     reachedGoalTwin = true;
                     break;
                 }
@@ -89,18 +74,19 @@ public class Solver {
             }
         }
 
+        totalMoves = minMoves;
+
         if(reachedGoal && !initial.isGoal()) {
             minMoves = 0;
-            //ssReversed = new ArrayList<Board>();
 
-            //upwards traversal
-            while(leafLast.getBoard() != initial) {
-                ssReversed.add(leafLast.getBoard());
-                leafLast = leafLast.getParent();
+            //upwards traversal from leaf
+            while(leafNode.getBoard() != initial) {
+                shortestSolution.add(leafNode.getBoard());
+                leafNode = leafNode.getParent();
                 minMoves++;
             }
 
-            Collections.reverse(ssReversed);
+            Collections.reverse(shortestSolution);
         }
 
     }
@@ -126,32 +112,18 @@ public class Solver {
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
         if (reachedGoal) {
-            return this.ssReversed;
+            return this.shortestSolution;
         }
         else {
             return null;
         }
     }
 
-    private int[][] createGoalBoard(int[][] board) {
-        int num = 1;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                board[i][j] = num;
-                num++;
-            }
-        }
-
-        board[board.length - 1][board.length - 1] = 0;
-
-        return board;
-    }
-
 
     // test client (see below)
     public static void main(String[] args) {
         // create initial board from file
-        In in = new In("puzzle4x4-14.txt");
+        In in = new In("puzzle4x4-40.txt");
         int n = in.readInt();
         int[][] tiles = new int[n][n];
         for (int i = 0; i < n; i++)
