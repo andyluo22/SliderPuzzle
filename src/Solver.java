@@ -13,6 +13,7 @@ public class Solver {
     private SearchNode leafNode;
     private List<Board> shortestSolution;
     private int totalMoves = 0;
+
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
@@ -123,7 +124,7 @@ public class Solver {
     // test client (see below)
     public static void main(String[] args) {
         // create initial board from file
-        In in = new In("puzzle4x4-40.txt");
+        In in = new In("puzzle4x4-48.txt");
         int n = in.readInt();
         int[][] tiles = new int[n][n];
         for (int i = 0; i < n; i++)

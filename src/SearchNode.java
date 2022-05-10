@@ -3,12 +3,14 @@ public class SearchNode implements Comparable<SearchNode> {
     private Board board;
     private int numMoves;
     private int manhattan;
+    private int priority;
 
     public SearchNode(SearchNode parent, Board board, int numMoves) {
         this.board = board;
         this.parent = parent;
         this.numMoves = numMoves;
         this.manhattan = board.manhattan();
+        this.priority = this.numMoves + this.manhattan;
     }
 
     public SearchNode getParent() {
@@ -45,7 +47,7 @@ public class SearchNode implements Comparable<SearchNode> {
 
     @Override
     public int compareTo(SearchNode o) {
-        int priority = this.manhattan - o.manhattan + this.numMoves - o.numMoves;
+        int priority = this.priority - o.priority;
 
         if(priority == 0) {
             return this.manhattan - o.manhattan;
