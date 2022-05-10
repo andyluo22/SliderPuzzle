@@ -86,7 +86,7 @@ public class Solver {
             }
         }
 
-        if(reachedGoal) {
+        if(reachedGoal && !initial.isGoal()) {
             minMoves = 0;
             ssReversed = new ArrayList<Board>();
 
@@ -124,7 +124,8 @@ public class Solver {
     public Iterable<Board> solution() {
         if (reachedGoal) {
             return this.ssReversed;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -147,7 +148,7 @@ public class Solver {
     // test client (see below)
     public static void main(String[] args) {
         // create initial board from file
-        In in = new In("puzzle3x3-unsolvable.txt");
+        In in = new In("puzzle3x3-solved.txt");
         int n = in.readInt();
         int[][] tiles = new int[n][n];
         for (int i = 0; i < n; i++)
