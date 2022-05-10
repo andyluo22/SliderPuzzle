@@ -42,12 +42,22 @@ public class Solver {
 
     // is the initial board solvable? (see below)
     public boolean isSolvable() {
-        return false;
+        if(reachedGoal) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        return 0;
+        if(reachedGoal) {
+            return minMoves;
+        }
+        else {
+            return -1;
+        }
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
