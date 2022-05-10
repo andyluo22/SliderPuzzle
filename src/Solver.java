@@ -23,7 +23,9 @@ public class Solver {
         MinPQ<SearchNode> pqTwin = new MinPQ<SearchNode>();
         shortestSolution = new ArrayList<Board>();
         List shortestSolutionTwin = new ArrayList<Board>();
+        ssReversed = new ArrayList<Board>();
         Board prev = null;
+
 
         //create goalBoard
         int[][] goalArray = new int[initial.dimension()][initial.dimension()];
@@ -35,6 +37,7 @@ public class Solver {
         }
         if (initial.equals(goalBoard)) {
             reachedGoal = true;
+            ssReversed.add(initial);
         }
         //create initial searchNode tree and add it into priority queue
         //Note:  The priority queue keeps track of smallest priority so we remove these and add the neighbours of the node into the pq
@@ -88,7 +91,7 @@ public class Solver {
 
         if(reachedGoal && !initial.isGoal()) {
             minMoves = 0;
-            ssReversed = new ArrayList<Board>();
+            //ssReversed = new ArrayList<Board>();
 
             //upwards traversal
             while(leafLast.getBoard() != initial) {
@@ -148,7 +151,7 @@ public class Solver {
     // test client (see below)
     public static void main(String[] args) {
         // create initial board from file
-        In in = new In("puzzle3x3-solved.txt");
+        In in = new In("puzzle4x4-14.txt");
         int n = in.readInt();
         int[][] tiles = new int[n][n];
         for (int i = 0; i < n; i++)
