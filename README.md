@@ -1,3 +1,3 @@
 # SliderPuzzle
-Slider puzzle 
-2
+# The Problem
+
