@@ -5,9 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Solver {
-    private int minMoves;
+    private int minMoves = 0;
     private List<Board> shortestSolution;
     private Board goalBoard;
+    private boolean reachedGoal = false;
+    private boolean reachedGoalTwin = false;
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
@@ -15,6 +17,7 @@ public class Solver {
             throw new IllegalArgumentException("Please input an nxn board that is not null");
         }
         MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
+        MinPQ<SearchNode> pqTwin = new MinPQ<SearchNode>();
         shortestSolution = new ArrayList<Board>();
         shortestSolution.add(initial);
 
@@ -23,9 +26,16 @@ public class Solver {
         goalArray = createGoalBoard(goalArray);
         goalBoard = new Board(goalArray);
 
-        //create initial searchNode and add it into priority queue
+        //create initial searchNode tree and add it into priority queue
+        //Note:  The priority queue keeps track of smallest priority so we remove these and add the neighbours of the node into the pq
         SearchNode initNode = new SearchNode(null, initial ,minMoves);
         pq.insert(initNode);
+        SearchNode initNodeTwin = new SearchNode(null,initial.twin(),minMoves);
+        pqTwin.insert(initNodeTwin);
+
+        while(reachedGoal || reachedGoalTwin) {
+
+        }
 
 
     }
@@ -47,8 +57,8 @@ public class Solver {
 
     private int[][] createGoalBoard(int[][] board) {
         int num = 1;
-        for (int i; i < board.length; i++) {
-            for (int j; j < board.length; j++) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
                 board[i][j] = num;
                 num++;
             }

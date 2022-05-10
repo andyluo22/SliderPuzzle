@@ -136,7 +136,6 @@ public class Board {
         int countLeft = 0, countRight = 0, countUp = 0, countDown = 0;
         int row = 0;
         int col = 0;
-        //Avoid deep copying and mutability
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 if (boardOriginal[i][j] == 0) {
@@ -148,7 +147,8 @@ public class Board {
 
         while (!condition) {
             int[][] boardStore = new int[len][len];
-            for(int i = 0; i < len; i++) {
+            //Avoid deep copying and mutability
+            for (int i = 0; i < len; i++) {
                 boardStore[i] = Arrays.copyOf(boardOriginal[i], boardOriginal[i].length);
             }
 
@@ -174,7 +174,7 @@ public class Board {
                 boardStore[row][col] = boardStore[row + 1][col];
                 boardStore[row + 1][col] = 0;
                 countDown++;
-                Board boardDown= new Board(boardStore);
+                Board boardDown = new Board(boardStore);
                 storeBoards.add(boardDown);
             } else {
                 condition = true;
@@ -186,8 +186,30 @@ public class Board {
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-        Board twin = new Board(this.tiles);
-        return twin;
+        int[][] boardTwin = new int[len][len];
+        //Avoid deep copying and mutability
+        for (int i = 0; i < len; i++) {
+            boardTwin[i] = Arrays.copyOf(this.tiles[i], this.tiles[i].length);
+        }
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (boardTwin[i][j] != 0 && j + 1 < len) {
+                    if(boardTwin[i][j + 1] != 0) {
+                        int store = boardTwin[i][j];
+
+                        boardTwin[i][j] = boardTwin[i][j + 1];
+                        boardTwin[i][j + 1] = store;
+
+                        Board twin = new Board(boardTwin);
+                        return twin;
+                    }
+                }
+            }
+
+        }
+
+        return null;
     }
 
     // unit testing (not graded)
@@ -245,6 +267,8 @@ public class Board {
         Board board3 = new Board(tiles3);
 
         System.out.println(board3.toString());
+        System.out.println("Twin board 3");
+        System.out.println(board3.twin().toString());
         System.out.println(board3.hamming());
         System.out.println(board3.manhattan());
         System.out.println(board3.isGoal());
@@ -266,17 +290,19 @@ public class Board {
         Board board4 = new Board(tiles4);
 
         System.out.println(board4.toString());
+        System.out.println("Twin board 4");
+        System.out.println(board4.twin().toString());
         System.out.println(board4.hamming());
         System.out.println(board4.manhattan());
         System.out.println(board4.isGoal());
         System.out.println();
 
-        System.out.println(board4.equals(board));
+        System.out.println(board4.equals(board));;
 
         board.neighbors();
         board2.neighbors();
 
-        for(Board neighbors: board2.neighbors()) {
+        for (Board neighbors : board2.neighbors()) {
             System.out.println(neighbors);
         }
 
