@@ -45,6 +45,15 @@ public class SearchNode implements Comparable<SearchNode> {
 
     @Override
     public int compareTo(SearchNode o) {
-        return (this.manhattan + this.numMoves) - (o.manhattan - o.numMoves);
+        int priority = this.manhattan - o.manhattan + this.numMoves - o.numMoves;
+
+        if(priority == 0) {
+            return this.manhattan - o.manhattan;
+        }
+        else {
+            return priority;
+        }
     }
+
+
 }
