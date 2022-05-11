@@ -11,7 +11,7 @@ To solve the slider puzzle in an elegant way, an implementation of the **A* algo
 
 #### Heuristic Function A* Search
 
-A heuristic algorithm is a shortcut to solve problems that contain multiple paths.  Since the tree traversal done to find the goal board looks at 
+A **heuristic** algorithm is a shortcut to solve problems that contain multiple paths. In mathematics, this is often denoted as the functions: _f(n) = g(n) + h(n)_ where _f(n)_ is the **heuristic**, _g(n)_ is the **cost** or amount of moves that we've taken to reach the board we are analyzing from the inital board, and _h(n)_ which is another defined cost that depends on the node itself.  In this case, the **heuristic cost** is computed as the **manhattan function** which is the total sum of how many steps it takes for each position in the grid to move to its correct positions.  Since the tree traversal done to find the goal board looks at each possible way the board being analyzed can move (up, down, left, right), a heuristic function is introduced to greatly reduce the chances the algorithm considers a path that does not lead to the shortest path.
 
 
 #### Detecting Unsolvable Boards
