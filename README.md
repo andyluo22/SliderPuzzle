@@ -28,4 +28,7 @@ By introducing more rigorous proofs on solving these boards, we find a very impo
 ## The A* Algorithm Implementation
 
 
+![image](https://user-images.githubusercontent.com/68613171/167746754-a13bae2e-4312-4830-a712-853cc950d382.png)
+
+
 #### Appendix of Terms: 
