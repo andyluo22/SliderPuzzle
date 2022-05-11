@@ -50,16 +50,16 @@ Thus, the strategy is to observe which of the board or twin board can be solved 
 This project delves into the advantages of using the A* algorithm as a graph traversal method. Thus, another useful applications of this implementation could be used to detect the shortest path it takes to get to a destination from a starting point (GPS systems) and the shortest distance describing the shortest path.
 
 #### Appendix of Terms: 
-Manhattan Function: the total sum of how many steps it takes for each position in the grid to move to its correct positions
+**Manhattan Function:** the total sum of how many steps it takes for each position in the grid to move to its correct positions
 
-Manhattan Priority Function:  the sum of the Manhattan function in addition with the number of moves it has taken to reach the current board from the initial board
+**Manhattan Priority Function:**  the sum of the Manhattan function in addition with the number of moves it has taken to reach the current board from the initial board
 
-Heuristic Function: this corresponds to the Manhattan priority function
+**Heuristic Function:** this corresponds to the Manhattan priority function
 
-Priority Queue: The priority queue is a minimum priority queue with higher level nodes in the heap tree corresponding to lower Manhattan priority
+**Priority Queue:** The priority queue is a minimum priority queue with higher level nodes in the heap tree corresponding to lower Manhattan priority
 
-Minimum Heap Tree: A tree data structure that orders the lowest manhattan priority node on top
+**Minimum Heap Tree:** A tree data structure that orders the lowest manhattan priority node on top
 
-A* Algorithm: graph or path traversal algorithm used to find the shortest path given a goal
+**A* Algorithm:** graph or path traversal algorithm used to find the shortest path given a goal
 
-Twin Board: a variation of a board that is created from the initial board by swapping any pairs of tiles that aren't the empty tile
+**Twin Board:** a variation of a board that is created from the initial board by swapping any pairs of tiles that aren't the empty tile
