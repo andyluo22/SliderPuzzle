@@ -36,7 +36,11 @@ _2._ Cache the Manhattan priorites of each search node when constructing that se
 
 ![image](https://user-images.githubusercontent.com/68613171/167746754-a13bae2e-4312-4830-a712-853cc950d382.png)
 
-**Figure 2:**  _Portrays a game tree that is a constructed overtime as the initial board is being analyzed - demonstrating how the heaped-node structure is processed and added into the priority queue_
+**Figure 2:**  _Portrays a game tree that is a constructed overtime as the initial board is being analyzed - demonstrating how the heaped-node structure is processed and added into the priority queue and how the goal board is found_
 
 
 #### Appendix of Terms: 
+Manhattan Function:
+Heuristic Function:
+Priority Queue:
+Minimum Heap: 
