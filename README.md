@@ -16,8 +16,11 @@ A **heuristic** algorithm is a shortcut to solve problems that contain multiple 
 
 #### Detecting Unsolvable Boards
 In order to detect unsolvable boards, we consider the equivalence classes of a board.  An equivalence class in mathematical terms describes a specific group or subset of the board and by encompassing all equivalence classes we span all the possibilities of whether or not the board is solvable or not.  In this case, the equivalence classes of a board can be grouped into 
+
 _1._ boards that can be solved in row-major order and,
+
 _2._ boards that cannot be solved in row major order.  
+
 By introducing more rigorous proofs on solving these boards, we find a very important fact that can be applied to detecting these unsolvable boards.  The proof is that if a board is unsolvable then its twin board is solvable and if a board is solvable then its twin board cannot be solved.  The twin board is simply just any board that is created from the initial board by swapping any pairs of tiles that aren't the empty tile.  This is a very important step in writing the _**A* algorithm**__ in a timely and spacely manner.
 
 #### Optimization of Space Complecity and Time Complexity 
