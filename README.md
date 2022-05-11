@@ -9,6 +9,10 @@ The slider puzzle is a game that is played on either a 3-by-3 grid or 4-by-4 gri
 ## Significance 
 To solve the slider puzzle in an elegant way, an implementation of the **A* algorithm** - which is a general artifical intelligence methodology - is used to find the shortest path to the goal board. This implementation utilizes a **priority queue** and a **minimum heap tree** to keep track of which nodes in the tree lead to the shortest path to the goal board.  Lastly, the key reason why the **A* algorithm** is used instead of other graph traversal algorithms is that the tree of game boards that are processed aren't pre-processed before hand.  One major drawback of using the A* algorithm is the space complexity.  However, before we approach memory bounded inputs of these puzzles, **A*** is the best solution in many cases based on time complexity and efficiency.    
 
+![image](https://user-images.githubusercontent.com/68613171/167942316-0f4801bc-91b3-437e-8362-ce122bda47af.png)
+
+**Figure 2:**  _The programs goal is to show the shortest path and the specific movements it takes to reach the goal board as shown above._
+
 #### Heuristic Function A* Search :mag:	
 
 A **heuristic** algorithm is a shortcut to solve problems that contain multiple paths. In mathematics, this is often denoted as the functions: _f(n) = g(n) + h(n)_ where _f(n)_ is the **heuristic**, _g(n)_ is the **cost** or amount of moves that we've taken to reach the board we are analyzing from the inital board, and _h(n)_ which is another defined cost that depends on the node itself.  In this case, the **heuristic cost** is computed as the **manhattan function** which is the total sum of how many steps it takes for each position in the grid to move to its correct positions.  Since the tree traversal done to find the goal board looks at each possible way the board being analyzed can move (up, down, left, right), a heuristic function is introduced to greatly reduce the chances the algorithm considers a path that does not lead to the shortest one by analyzing the node that has the lowest heuristic or cost value in the tree graph.
@@ -36,7 +40,7 @@ _2._ Cache the Manhattan priorites of each search node when constructing that se
 
 ![image](https://user-images.githubusercontent.com/68613171/167746754-a13bae2e-4312-4830-a712-853cc950d382.png)
 
-**Figure 2:**  _Portrays a game tree that is a constructed overtime as the initial board is being analyzed - demonstrating how the heaped-node structure is processed and added into the priority queue and how the goal board is found_. _Each board is defined to be a **search node** - it contains information of what the Manhattan function is, the number of moves taken to reach the board from it's initial board, and a reference to its parent node._
+**Figure 3:**  _Portrays a game tree that is a constructed overtime as the initial board is being analyzed - demonstrating how the heaped-node structure is processed and added into the priority queue and how the goal board is found_. _Each board is defined to be a **search node** - it contains information of what the Manhattan function is, the number of moves taken to reach the board from it's initial board, and a reference to its parent node._
 
 **Strategy:** Based on the fact that, **if a board is unsolvable then its twin board is solvable and if a board is solvable then its twin board cannot be solved**, then the implementation considers running both the board being anaylzed and any version of it's twin board through the A* algorithm and as soon as the goal board is reached by either the twin board or board, then we can determine whether:
 
