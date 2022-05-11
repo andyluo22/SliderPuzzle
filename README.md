@@ -7,7 +7,7 @@ The slider puzzle is a game that is played on either a 3-by-3 grid or 4-by-4 gri
 **Figure 1:** _Given an initial starting board on the left we want to achieve the goal board in row-major order on the right_
 
 ## Significance 
-To solve the slider puzzle in an elegant way, an implementation of the **A* algorithm** - which is a general artifical intelligence methodology - is used to find the shortest path to the goal board. This implementation utilizes a priority queue and a minimum heap tree to keep track of which nodes in the tree lead to the shortest path to the goal board.  Lastly, the key reason why the **A* algorithm** is used instead of other graph traversal algorithms is that the tree of game boards that are processed aren't pre-processed before hand.  One major drawback of using the A* algorithm is the space complexity.  However, before we approach memory bounded inputs of these puzzles, **A*** is the best solution in many cases based on time complexity and efficiency.    
+To solve the slider puzzle in an elegant way, an implementation of the **A* algorithm** - which is a general artifical intelligence methodology - is used to find the shortest path to the goal board. This implementation utilizes a **priority queue** and a **minimum heap tree** to keep track of which nodes in the tree lead to the shortest path to the goal board.  Lastly, the key reason why the **A* algorithm** is used instead of other graph traversal algorithms is that the tree of game boards that are processed aren't pre-processed before hand.  One major drawback of using the A* algorithm is the space complexity.  However, before we approach memory bounded inputs of these puzzles, **A*** is the best solution in many cases based on time complexity and efficiency.    
 
 #### Heuristic Function A* Search
 
@@ -27,9 +27,9 @@ By introducing more rigorous proofs on solving these boards, we find a very impo
 
 Since the **A* Algorithm** and pathfinding algorithms inevitably must consider different paths, this takes up a lot of time and heap storage space.  To improve the efficiency of the algorithm, two critical optimizations were considered:
 
-_1._ Never consider search nodes that are the same as the parent nodes parent, or simply the grandparent of the current node as this leads to redudancy in path computation
+_1._ Never consider search nodes that are the same as the parent nodes' parent, or simply do not consider the grandparent of the current node as this leads to redudancy in path computation
 
-_2._ Cache the Manhattan priorites of each search node when constructing that search node - simply instantiate and pre-compute the Manhattan priorty value before hand so that the priority queue does not need to compute these values from scratch.
+_2._ Cache the Manhattan priorites of each search node when constructing that search node to an instance variable - simply instantiate and pre-compute the Manhattan priorty value before hand so that the priority queue does not need to compute these values from scratch each time - reducing memory storage and time.
 
 ## The A* Algorithm Implementation
 
