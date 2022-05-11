@@ -25,5 +25,7 @@ By introducing more rigorous proofs on solving these boards, we find a very impo
 
 #### Optimization of Space Complecity and Time Complexity 
 
+## The A* Algorithm Implementation
+
 
 #### Appendix of Terms: 
