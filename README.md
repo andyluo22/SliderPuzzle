@@ -15,7 +15,7 @@ A **heuristic** algorithm is a shortcut to solve problems that contain multiple 
 
 
 #### Detecting Unsolvable Boards
-In order to detect unsolvable boards, we consider the equivalence classes of a board.  An equivalence class in mathematical terms describes a specific group or subset of the board and by encompassing all equivalence classes we span all the possibilities of whether or not the board is solvable or not.  In this case, the equivalence classes of a board can be grouped into 
+In order to detect unsolvable boards, we consider the equivalence classes of a board.  An equivalence class in mathematical terms describes a specific group or subset of the board and by encompassing all equivalence classes we span all the possibilities of whether or not the board is solvable or not.  In this case, the equivalence classes of a board in terms of solvability can be grouped into 
 
 _1._ boards that can be solved in row-major order and,
 
