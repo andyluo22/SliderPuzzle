@@ -41,6 +41,15 @@ _2._ Cache the Manhattan priorites of each search node when constructing that se
 
 #### Appendix of Terms: 
 Manhattan Function:
+
+Manhattan Priority Function: 
+
 Heuristic Function:
+
 Priority Queue:
-Minimum Heap: 
+
+Minimum Heap Tree:
+
+A* Algorithm:
+
+
