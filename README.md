@@ -25,6 +25,12 @@ By introducing more rigorous proofs on solving these boards, we find a very impo
 
 #### Optimization of Space Complecity and Time Complexity 
 
+Since the **A* Algorithm** and pathfinding algorithms inevitably must consider different paths, this takes up a lot of time and heap storage space.  To improve the efficiency of the algorithm, two critical optimizations were considered:
+
+_1._ Never consider search nodes that are the same as the parent nodes parent, or simply the grandparent of the current node as this leads to redudancy in path computation
+
+_2._ Cache the Manhattan priorites of each search node when constructing that search node - simply instantiate and pre-compute the Manhattan priorty value before hand so that the priority queue does not need to compute these values from scratch.
+
 ## The A* Algorithm Implementation
 
 
