@@ -11,11 +11,14 @@ To solve the slider puzzle in an elegant way, an implementation of the **A* algo
 
 #### Heuristic Function A* Search
 
-A **heuristic** algorithm is a shortcut to solve problems that contain multiple paths. In mathematics, this is often denoted as the functions: _f(n) = g(n) + h(n)_ where _f(n)_ is the **heuristic**, _g(n)_ is the **cost** or amount of moves that we've taken to reach the board we are analyzing from the inital board, and _h(n)_ which is another defined cost that depends on the node itself.  In this case, the **heuristic cost** is computed as the **manhattan function** which is the total sum of how many steps it takes for each position in the grid to move to its correct positions.  Since the tree traversal done to find the goal board looks at each possible way the board being analyzed can move (up, down, left, right), a heuristic function is introduced to greatly reduce the chances the algorithm considers a path that does not lead to the shortest path.
+A **heuristic** algorithm is a shortcut to solve problems that contain multiple paths. In mathematics, this is often denoted as the functions: _f(n) = g(n) + h(n)_ where _f(n)_ is the **heuristic**, _g(n)_ is the **cost** or amount of moves that we've taken to reach the board we are analyzing from the inital board, and _h(n)_ which is another defined cost that depends on the node itself.  In this case, the **heuristic cost** is computed as the **manhattan function** which is the total sum of how many steps it takes for each position in the grid to move to its correct positions.  Since the tree traversal done to find the goal board looks at each possible way the board being analyzed can move (up, down, left, right), a heuristic function is introduced to greatly reduce the chances the algorithm considers a path that does not lead to the shortest one.
 
 
 #### Detecting Unsolvable Boards
-
+In order to detect unsolvable boards, we consider the equivalence classes of a board.  An equivalence class in mathematical terms describes a specific group or subset of the board and by encompassing all equivalence classes we span all the possibilities of whether or not the board is solvable or not.  In this case, the equivalence classes of a board can be grouped into 
+_1._ boards that can be solved in row-major order and,
+_2._ boards that cannot be solved in row major order.  
+By introducing more rigorous proofs on solving these boards, we find a very important fact that can be applied to detecting these unsolvable boards.  The proof is that if a board is unsolvable then its twin board is solvable and if a board is solvable then its twin board cannot be solved.  The twin board is simply just any board that is created from the initial board by swapping any pairs of tiles that aren't the empty tile.  This is a very important step in writing the _**A* algorithm**__ in a timely and spacely manner.
 
 #### Optimization of Space Complecity and Time Complexity 
 
