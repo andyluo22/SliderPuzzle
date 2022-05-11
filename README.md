@@ -6,11 +6,11 @@ The slider puzzle is a game that is played on either a 3-by-3 grid or 4-by-4 gri
 
 **Figure 1:** _Given an initial starting board on the left we want to achieve the goal board in row-major order on the right_
 
-### Significance 
-To solve the slider puzzle in an elegant way, an implementation of the A* algorithm - which is a general artifical intelligence methodology - to find the most efficient path to the goal board.  This implementation utilizes a priority queue and a minimum heap tree to efficiently  
+## Significance 
+To solve the slider puzzle in an elegant way, an implementation of the **A* algorithm** - which is a general artifical intelligence methodology - is used to find the shortest path to the goal board. This implementation utilizes a priority queue and a minimum heap tree to keep track of which nodes in the tree lead to the shortest path to the goal board.  Lastly, the key reason why the **A* algorithm** is used instead of other graph traversal algorithms is that the tree of game boards that are processed aren't pre-processed before hand.  One major drawback of using the A* algorithm is the space complexity.  However, before we approach memory bounded inputs of these puzzles, **A*** is the best solution in many cases in terms of time complexity and efficiency.    
 
+#### Heuristic Function A* Search
 
-#### Heuristic Function 
 
 
 #### Detecting Unsolvable Boards
