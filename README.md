@@ -23,7 +23,7 @@ _2._ boards that cannot be solved in row-major order.
 
 By introducing more rigorous proofs on solving these boards, we find a very important fact that can be applied to detecting these unsolvable boards.  The proof is that **if a board is unsolvable then its twin board is solvable and if a board is solvable then its twin board cannot be solved**.  The **twin board** is simply just any board that is created from the initial board by swapping any pairs of tiles that aren't the empty tile.  This is a very important step in writing the _**A* algorithm**__ in a timely and spacely manner.
 
-#### Optimization of Space Complecity and Time Complexity 
+#### Optimization of Space Complexity and Time Complexity 
 
 Since the **A* Algorithm** and pathfinding algorithms inevitably must consider different paths, this takes up a lot of time and heap storage space.  To improve the efficiency of the algorithm, two critical optimizations were considered:
 
@@ -38,6 +38,11 @@ _2._ Cache the Manhattan priorites of each search node when constructing that se
 
 **Figure 2:**  _Portrays a game tree that is a constructed overtime as the initial board is being analyzed - demonstrating how the heaped-node structure is processed and added into the priority queue and how the goal board is found_. _Each board is defined to be a **search node** - it contains information of what the Manhattan function is, the number of moves taken to reach the board from it's initial board, and a reference to its parent node._
 
+Based on the fact that, **if a board is unsolvable then its twin board is solvable and if a board is solvable then its twin board cannot be solved**, then the implementation considers running both the board being anaylzed and any version of it's twin board through the A* algorithm and as soon as the goal board is reached by either the twin board or board, then we can determine whether:
+
+_1._ The board is solvable and the twin board is unsolvable - which allow us to outline the shortest path and how many steps it takes to reach the goal board from the initial board.
+
+_2._ The board is unsolvable and the twin board is solvable - which allow us to determine that there is no such path possible.
 
 ### Expansion Problems
 This project delves into the advantages of using the A* algorithm as a graph traversal method. Thus, another useful applications of this implementation could be used to detect the shortest path it takes to get to a destination from a starting point (GPS systems) and the shortest distance describing the shortest path.
