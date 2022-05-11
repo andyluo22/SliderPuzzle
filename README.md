@@ -38,11 +38,13 @@ _2._ Cache the Manhattan priorites of each search node when constructing that se
 
 **Figure 2:**  _Portrays a game tree that is a constructed overtime as the initial board is being analyzed - demonstrating how the heaped-node structure is processed and added into the priority queue and how the goal board is found_. _Each board is defined to be a **search node** - it contains information of what the Manhattan function is, the number of moves taken to reach the board from it's initial board, and a reference to its parent node._
 
-Based on the fact that, **if a board is unsolvable then its twin board is solvable and if a board is solvable then its twin board cannot be solved**, then the implementation considers running both the board being anaylzed and any version of it's twin board through the A* algorithm and as soon as the goal board is reached by either the twin board or board, then we can determine whether:
+**Strategy:** Based on the fact that, **if a board is unsolvable then its twin board is solvable and if a board is solvable then its twin board cannot be solved**, then the implementation considers running both the board being anaylzed and any version of it's twin board through the A* algorithm and as soon as the goal board is reached by either the twin board or board, then we can determine whether:
 
 _1._ The board is solvable and the twin board is unsolvable - which allow us to outline the shortest path and how many steps it takes to reach the goal board from the initial board.
 
 _2._ The board is unsolvable and the twin board is solvable - which allow us to determine that there is no such path possible.
+
+Thus, the strategy is to observe which of the board or twin board can be solved first.  If the twin board is solved first, the board cannot be solved in major-row order and if the board is solved first, we can determine the shortest path and the specific moves we should perform in order to reach the goal board.
 
 ### Expansion Problems
 This project delves into the advantages of using the A* algorithm as a graph traversal method. Thus, another useful applications of this implementation could be used to detect the shortest path it takes to get to a destination from a starting point (GPS systems) and the shortest distance describing the shortest path.
